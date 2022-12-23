@@ -1,6 +1,13 @@
-import { component$ } from '@builder.io/qwik';
-import type { DocumentHead } from '@builder.io/qwik-city';
-import { Link } from '@builder.io/qwik-city';
+import { component$ } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
+import { Link } from "@builder.io/qwik-city";
+import { PrismaClient } from "@prisma/client";
+
+export const onGet = async () => {
+  const client = new PrismaClient();
+  const user = await client.user.findFirst();
+  return user;
+};
 
 export default component$(() => {
   return (
@@ -58,7 +65,10 @@ export default component$(() => {
             <code>npm run qwik add azure-swa</code>
           </td>
           <td>
-            <a href="https://learn.microsoft.com/azure/static-web-apps/overview" target="_blank">
+            <a
+              href="https://learn.microsoft.com/azure/static-web-apps/overview"
+              target="_blank"
+            >
               Azure Static Web Apps
             </a>
           </td>
@@ -145,11 +155,11 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Welcome to Qwik',
+  title: "Welcome to Qwik",
   meta: [
     {
-      name: 'description',
-      content: 'Qwik site description',
+      name: "description",
+      content: "Qwik site description",
     },
   ],
 };
